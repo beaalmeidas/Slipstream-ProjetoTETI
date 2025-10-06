@@ -2,20 +2,20 @@ import express from "express";
 import router from "./routes/index";
 import swaggerUi from "swagger-ui-express";
 
+
 const swaggerJsdoc = require("swagger-jsdoc");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Swagger setup
 const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "Express TS API",
+            title: "Slipstream API",
             version: "1.0.0",
-            description: "Basic API in Express + TypeScript",
+            description: "F1 race reviews, championship information and management for drivers and teams.",
         },
         servers: [
             {
@@ -23,16 +23,15 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ["./src/routes/*.ts"], // Path to files with JSDoc comments
+    apis: ["./src/routes/*.ts"],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// API routes
 app.use("/api", router);
 
 app.listen(PORT, () => {
-    console.log(`✅ Server running at http://localhost:${PORT}`);
-    console.log(`📖 Swagger docs available at http://localhost:${PORT}/api-docs`);
+    console.log(`\n-- Server running at http://localhost:${PORT}`);
+    console.log(`-- Swagger docs available at http://localhost:${PORT}/api-docs`);
 });
