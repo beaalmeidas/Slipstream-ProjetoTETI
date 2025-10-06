@@ -1,5 +1,5 @@
 {
-  "name": "express-ts-basic",
+  "name": "slipstream-api",
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
