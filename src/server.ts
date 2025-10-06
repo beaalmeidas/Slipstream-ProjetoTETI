@@ -29,7 +29,7 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use("/api", router);
+app.use("/", router);
 
 app.listen(PORT, () => {
     console.log(`\n-- Server running at http://localhost:${PORT}`);

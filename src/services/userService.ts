@@ -6,22 +6,41 @@ import { ServiceError } from "../utils/serviceError";
 export const userService = {
 
     async createUser(username: string, email: string, password: string) {
-        // checking if user already exists
-        const existing = await prisma.user.findUnique({ where: {email} });
-        if (existing) {
-            throw new ServiceError("This user already exists!", 400);
-        }
+        console.log("SERVICE: createUser called with:", { username, email, password });
 
         if (!username || !email || !password) {
-            throw new ServiceError("All fields are required.", 404);
+        throw new ServiceError("All fields are required.", 400);
         }
 
-        // 10 = amount of times bcrypt uses a hash function on the password
-        const hashed_pass = await bcrypt.hash(password, 10);
+        let existing;
+        try {
+            existing = await prisma.user.findUnique({ where: { email } });
+        } catch (err) {
+            console.error("Prisma findUnique error:", err);
+            throw new ServiceError("Database error when checking existing user.", 500);
+        }
 
-        const newUser = await prisma.user.create({
-            data: {username, email, password: hashed_pass}
+        if (existing) {
+        throw new ServiceError("This user already exists!", 400);
+        }
+
+        let hashed_pass;
+        try {
+        hashed_pass = await bcrypt.hash(password, 10);
+        } catch (err) {
+        console.error("bcrypt.hash error:", err);
+        throw new ServiceError("Error hashing password.", 500);
+        }
+
+        let newUser;
+        try {
+        newUser = await prisma.user.create({
+            data: { username, email, password: hashed_pass },
         });
+        } catch (err) {
+        console.error("Prisma create error:", err);
+        throw new ServiceError("Database error when creating user.", 500);
+        }
 
         return newUser;
     },
