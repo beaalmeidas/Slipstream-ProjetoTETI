@@ -9,7 +9,7 @@ export const userService = {
         console.log("SERVICE: createUser called with:", { username, email, password });
 
         if (!username || !email || !password) {
-        throw new ServiceError("All fields are required.", 400);
+            throw new ServiceError("All fields are required.", 400);
         }
 
         let existing;
@@ -21,25 +21,25 @@ export const userService = {
         }
 
         if (existing) {
-        throw new ServiceError("This user already exists!", 400);
+            throw new ServiceError("This user already exists!", 400);
         }
 
         let hashed_pass;
         try {
-        hashed_pass = await bcrypt.hash(password, 10);
+            hashed_pass = await bcrypt.hash(password, 10);
         } catch (err) {
-        console.error("bcrypt.hash error:", err);
-        throw new ServiceError("Error hashing password.", 500);
+            console.error("bcrypt.hash error:", err);
+            throw new ServiceError("Error hashing password.", 500);
         }
 
         let newUser;
         try {
-        newUser = await prisma.user.create({
-            data: { username, email, password: hashed_pass },
-        });
+            newUser = await prisma.user.create({
+                data: { username, email, password: hashed_pass },
+            });
         } catch (err) {
-        console.error("Prisma create error:", err);
-        throw new ServiceError("Database error when creating user.", 500);
+            console.error("Prisma create error:", err);
+            throw new ServiceError("Database error when creating user.", 500);
         }
 
         return newUser;
