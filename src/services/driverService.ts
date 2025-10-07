@@ -20,14 +20,43 @@ export const driverService = {
     },
 
     async getAllDrivers() {
-        const drivers = await prisma.driver.findMany({ include: { team: true } });
+        const drivers = await prisma.driver.findMany({
+            include: {
+                team: true,
+                racesWon: {
+                    select: {
+                    id: true,
+                    name: true,
+                    circuit: true,
+                    date: true,
+                    },
+            },
+            },
+        });
+
         if (!drivers.length) throw new ServiceError("No drivers found.", 404);
+
         return drivers;
     },
 
     async getDriverById(id: number) {
-        const driver = await prisma.driver.findUnique({ where: { id }, include: { team: true } });
+        const driver = await prisma.driver.findUnique({
+            where: { id },
+            include: {
+                team: true,
+                racesWon: {
+                    select: {
+                    id: true,
+                    name: true,
+                    circuit: true,
+                    date: true,
+                    },
+                },
+            },
+        });
+
         if (!driver) throw new ServiceError("Driver not found.", 404);
+
         return driver;
     },
 

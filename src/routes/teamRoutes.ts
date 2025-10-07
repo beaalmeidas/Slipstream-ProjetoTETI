@@ -20,6 +20,9 @@ const router = Router();
  *             properties:
  *               name:
  *                 type: string
+ *               wccPoints:
+ *                 type: integer
+ *                 description: "Optional. Defaults to 0 if not provided."
  *     responses:
  *       201:
  *         description: Team created successfully
