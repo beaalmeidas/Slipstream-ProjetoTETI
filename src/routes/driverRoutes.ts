@@ -100,6 +100,10 @@ router.get("/:id", driverController.getDriverById);
  *                 type: string
  *               teamId:
  *                 type: integer
+ *                 description: "Optional. ID of the team."
+ *               wdcPoints:
+ *                 type: integer
+ *                 description: "Optional. Driver's World Championship points."
  *     responses:
  *       200:
  *         description: Driver updated successfully

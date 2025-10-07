@@ -88,6 +88,9 @@ router.get("/:id", teamController.getTeamById);
  *             properties:
  *               name:
  *                 type: string
+ *               wccPoints:
+ *                 type: integer
+ *                 description: Optional. Update World Constructors' Championship points.
  *     responses:
  *       200:
  *         description: Team updated successfully

@@ -60,19 +60,28 @@ export const driverService = {
         return driver;
     },
 
-    async updateDriver(id: number, data: { firstName?: string; lastName?: string; nationality?: string; teamId?: number }) {
+    async updateDriver(
+        id: number,
+        data: {
+            firstName?: string;
+            lastName?: string;
+            nationality?: string;
+            teamId?: number;
+            wdcPoints?: number;  // <-- adicionado
+        }
+    ) {
         const existing = await prisma.driver.findUnique({ where: { id } });
         if (!existing) throw new ServiceError("Driver not found.", 404);
 
         if (data.firstName && data.lastName) {
-        const nameExists = await prisma.driver.findFirst({
-            where: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            NOT: { id },
-            },
-        });
-        if (nameExists) throw new ServiceError("Driver with this name already exists!", 400);
+            const nameExists = await prisma.driver.findFirst({
+                where: {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    NOT: { id },
+                },
+            });
+            if (nameExists) throw new ServiceError("Driver with this name already exists!", 400);
         }
 
         return await prisma.driver.update({ where: { id }, data });
