@@ -1,5 +1,7 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { userController } from "../controllers/userController";
+import { validateSchema } from "../utils/validateSchema";
+import { createUserSchema, updateUserSchema } from "../schemas/userSchema";
 
 
 const router = Router();
@@ -30,7 +32,7 @@ const router = Router();
  *       400:
  *         description: User already exists
  */
-router.post("/create", userController.createUser);
+router.post("/create", validateSchema(createUserSchema), userController.createUser);
 
 /**
  * @swagger
