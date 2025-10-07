@@ -1,5 +1,8 @@
 import { Router } from "express";
 import { driverController } from "../controllers/driverController";
+import { validateSchema } from "../utils/validateSchema";
+import { createDriverSchema, updateDriverSchema } from "../schemas/driverSchema";
+
 
 const router = Router();
 
@@ -34,7 +37,7 @@ const router = Router();
  *       400:
  *         description: Driver already exists or invalid data
  */
-router.post("/create", driverController.createDriver);
+router.post("/create", validateSchema(createDriverSchema), driverController.createDriver);
 
 /**
  * @swagger
@@ -103,7 +106,7 @@ router.get("/:id", driverController.getDriverById);
  *       404:
  *         description: Driver not found
  */
-router.put("/:id", driverController.updateDriver);
+router.put("/:id", validateSchema(updateDriverSchema), driverController.updateDriver);
 
 /**
  * @swagger

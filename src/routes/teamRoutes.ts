@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { teamController } from "../controllers/teamController";
+import { validateSchema } from "../utils/validateSchema";
+import { createTeamSchema, updateTeamSchema } from "../schemas/teamSchema";
 
 
 const router = Router();
@@ -29,7 +31,7 @@ const router = Router();
  *       400:
  *         description: Team already exists or invalid data
  */
-router.post("/create", teamController.createTeam);
+router.post("/create", validateSchema(createTeamSchema), teamController.createTeam);
 
 /**
  * @swagger
@@ -92,7 +94,7 @@ router.get("/:id", teamController.getTeamById);
  *       404:
  *         description: Team not found
  */
-router.put("/:id", teamController.updateTeam);
+router.put("/:id", validateSchema(updateTeamSchema), teamController.updateTeam);
 
 /**
  * @swagger

@@ -99,7 +99,7 @@ router.get("/:id", userController.getUserById);
  *       404:
  *         description: User not found
  */
-router.put("/:id", userController.updateUser);
+router.put("/:id", validateSchema(updateUserSchema), userController.updateUser);
 
 /**
  * @swagger

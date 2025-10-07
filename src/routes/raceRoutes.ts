@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { raceController } from "../controllers/raceController";
+import { validateSchema } from "../utils/validateSchema";
+import { createRaceSchema, updateRaceSchema } from "../schemas/raceSchema";
 
 
 const router = Router();
@@ -48,7 +50,7 @@ const router = Router();
  *       400:
  *         description: Race already exists or invalid data
  */
-router.post("/create", raceController.createRace);
+router.post("/create", validateSchema(createRaceSchema), raceController.createRace);
 
 /**
  * @swagger
@@ -128,7 +130,7 @@ router.get("/:id", raceController.getRaceById);
  *       404:
  *         description: Race not found
  */
-router.put("/:id", raceController.updateRace);
+router.put("/:id", validateSchema(updateRaceSchema), raceController.updateRace);
 
 /**
  * @swagger
