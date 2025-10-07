@@ -22,6 +22,12 @@ const swaggerOptions = {
                 url: "http://localhost:3000",
             },
         ],
+        tags: [
+            { name: "User", description: "User CRUD operations" },
+            { name: "Team", description: "Team CRUD operations" },
+            { name: "Driver", description: "Driver CRUD operations" },
+            { name: "Race", description: "Race CRUD operations" }
+        ],
     },
     apis: ["./src/routes/*.ts"],
 };
