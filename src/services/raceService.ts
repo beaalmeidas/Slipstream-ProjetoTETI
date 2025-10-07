@@ -1,6 +1,7 @@
 import prisma from "../prisma/client";
 import { ServiceError } from "../utils/serviceError";
 
+
 export const raceService = {
     async createRace(data: {
         name: string;
