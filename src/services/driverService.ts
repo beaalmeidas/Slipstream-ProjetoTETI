@@ -67,7 +67,7 @@ export const driverService = {
             lastName?: string;
             nationality?: string;
             teamId?: number;
-            wdcPoints?: number;  // <-- adicionado
+            wdcPoints?: number;
         }
     ) {
         const existing = await prisma.driver.findUnique({ where: { id } });

@@ -31,6 +31,9 @@ const router = Router();
  *                 type: string
  *               teamId:
  *                 type: integer
+ *               wdcPoints:
+ *                 type: integer
+ *                 description: "Optional. Driver's World Championship points."
  *     responses:
  *       201:
  *         description: Driver created successfully

@@ -6,6 +6,7 @@ export const createDriverSchema = z.object({
     lastName: z.string().min(1, { message: "Last name is required." }),
     nationality: z.string().min(1, { message: "Nationality is required." }),
     teamId: z.number().int().optional(),
+    wdcPoints: z.number().int().min(0).optional(),
 });
 
 export const updateDriverSchema = createDriverSchema.partial();
