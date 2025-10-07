@@ -26,7 +26,7 @@ const router = Router();
  *       400:
  *         description: Team already exists or invalid data
  */
-router.post("/team/create", teamController.createTeam);
+router.post("/create", teamController.createTeam);
 
 /**
  * @swagger
@@ -38,7 +38,7 @@ router.post("/team/create", teamController.createTeam);
  *       200:
  *         description: List of teams
  */
-router.get("/team/all", teamController.getAllTeams);
+router.get("/all", teamController.getAllTeams);
 
 /**
  * @swagger
@@ -59,7 +59,7 @@ router.get("/team/all", teamController.getAllTeams);
  *       404:
  *         description: Team not found
  */
-router.get("/team/:id", teamController.getTeamById);
+router.get("/:id", teamController.getTeamById);
 
 /**
  * @swagger
@@ -89,7 +89,7 @@ router.get("/team/:id", teamController.getTeamById);
  *       404:
  *         description: Team not found
  */
-router.put("/team/:id", teamController.updateTeam);
+router.put("/:id", teamController.updateTeam);
 
 /**
  * @swagger
@@ -110,6 +110,6 @@ router.put("/team/:id", teamController.updateTeam);
  *       404:
  *         description: Team not found
  */
-router.delete("/team/:id", teamController.deleteTeam);
+router.delete("/:id", teamController.deleteTeam);
 
 export default router;

@@ -6,7 +6,7 @@ export const teamService = {
     async createTeam(name: string) {
         if (!name) throw new ServiceError("Team name is required.", 400);
 
-        const existing = await prisma.team.findUnique({ where: { id: 1 }, });
+        const existing = await prisma.team.findUnique({ where: { name } });
         if (existing) throw new ServiceError("Team already exists!", 400);
 
         return await prisma.team.create({ data: { name } });
