@@ -2,17 +2,21 @@ import prisma from "../prisma/client";
 import { ServiceError } from "../utils/serviceError";
 
 export const driverService = {
-
     async createDriver(data: { firstName: string; lastName: string; nationality: string; teamId?: number }) {
         if (!data.firstName) throw new ServiceError("Driver firstName is required.", 400);
         if (!data.lastName) throw new ServiceError("Driver lastName is required.", 400);
         if (!data.nationality) throw new ServiceError("Driver nationality is required.", 400);
 
+        if (data.teamId) {
+            const teamExists = await prisma.team.findUnique({ where: { id: data.teamId } });
+            if (!teamExists) throw new ServiceError(`Team with ID ${data.teamId} does not exist.`, 400);
+        }
+
         const existing = await prisma.driver.findFirst({
-        where: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-        },
+            where: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+            },
         });
         if (existing) throw new ServiceError("Driver already exists!", 400);
 
@@ -25,12 +29,12 @@ export const driverService = {
                 team: true,
                 racesWon: {
                     select: {
-                    id: true,
-                    name: true,
-                    circuit: true,
-                    date: true,
+                        id: true,
+                        name: true,
+                        circuit: true,
+                        date: true,
                     },
-            },
+                },
             },
         });
 
@@ -46,10 +50,10 @@ export const driverService = {
                 team: true,
                 racesWon: {
                     select: {
-                    id: true,
-                    name: true,
-                    circuit: true,
-                    date: true,
+                        id: true,
+                        name: true,
+                        circuit: true,
+                        date: true,
                     },
                 },
             },
@@ -82,6 +86,11 @@ export const driverService = {
                 },
             });
             if (nameExists) throw new ServiceError("Driver with this name already exists!", 400);
+        }
+
+        if (data.teamId) {
+            const teamExists = await prisma.team.findUnique({ where: { id: data.teamId } });
+            if (!teamExists) throw new ServiceError(`Team with ID ${data.teamId} does not exist.`, 400);
         }
 
         return await prisma.driver.update({ where: { id }, data });
