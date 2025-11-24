@@ -2,6 +2,15 @@ import prisma from "../prisma/client";
 import bcrypt from "bcryptjs";
 import { ServiceError } from "../utils/serviceError";
 
+/*
+- createUser
+- getAllUsers
+- getUserById
+- getUserByEmail
+- updateUser
+- deleteUser
+*/
+
 
 export const userService = {
 
@@ -72,6 +81,14 @@ export const userService = {
             where: { id: id }
         })
 
+        return user;
+    },
+
+    async getUserByEmail(email: string) {
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            throw new Error("User not found");
+        }
         return user;
     },
 
