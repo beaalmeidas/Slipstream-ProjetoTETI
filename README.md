@@ -92,10 +92,8 @@ Swagger will run on http://localhost:3000/api-docs.
 
 ---
 
+## Estrutura do projeto:
 ```
-hoje eu preciso fazer o frontend em react, além de outras adaptações e deploy, de um projeto.
-
-essa é a arquitetura:
 Slipstream-ProjetoTETI/ 
 │
 ├── api/ 

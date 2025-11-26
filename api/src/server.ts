@@ -1,6 +1,9 @@
+import "dotenv/config";
+
 import express from "express";
 import router from "./routes/index";
 import swaggerUi from "swagger-ui-express";
+import "./config/env";
 
 
 const swaggerJsdoc = require("swagger-jsdoc");
