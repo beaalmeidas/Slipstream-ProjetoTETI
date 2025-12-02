@@ -91,3 +91,65 @@ Swagger will run on http://localhost:3000/api-docs.
 </br>
 
 ---
+
+```
+Slipstream-ProjetoTETI/ 
+├── assets/ 
+│   ├── country-flags/
+│   ├── driver-photos/
+│
+├── ui/ /* pasta na qual eu quero colocar o frontend */ 
+│
+├── api/ 
+│   ├── node_modules/
+│   ├── prisma/
+│   │   ├── migrations/
+│   │   ├── schema.prisma
+│   ├── src/
+│   │   ├── prisma/
+│   │   │   └── client.ts
+│   │   ├── generated/
+│   │   │   └── prisma/
+│   │   ├── routes/
+│   │   │   └── index.ts
+│   │   │   └── userRoutes.ts
+│   │   │   └── driverRoutes.ts
+│   │   │   └── raceRoutes.ts
+│   │   │   └── teamRoutes.ts
+│   │   ├── controllers/
+│   │   │   └── userController.ts
+│   │   │   └── driverController.ts
+│   │   │   └── raceController.ts
+│   │   │   └── raceController.ts
+│   │   ├── schemas/
+│   │   │   └── userSchema.ts
+│   │   │   └── driverSchema.ts
+│   │   │   └── raceSchema.ts
+│   │   │   └── teamSchema.ts
+│   │   ├── services/
+│   │   │   └── authService.ts
+│   │   │   └── userService.ts
+│   │   │   └── driverService.ts
+│   │   │   └── raceService.ts
+│   │   │   └── teamService.ts
+│   │   ├── types/
+│   │   │   └── swager-jsdoc.d.ts
+│   │   ├── utils/
+│   │   │   └── auth/
+│   │   │       └── auth.middleware.js
+│   │   │       └── jwt.ts
+│   │   │   └── serviceError.ts
+│   │   │   └── validateSchema.ts
+│   │   └── .env
+│   │   └── .gitignore
+│   │   └── app.ts
+│   │   └── server.ts
+│   ├── package-lock.json
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── .env
+├── .env-example
+├── .gitignore
+└── README.md
+```
