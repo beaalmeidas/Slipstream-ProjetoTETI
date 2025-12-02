@@ -5,13 +5,12 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 
@@ -21,7 +20,10 @@ model User {
   username      String
   email         String      @unique
   password      String
+
   reviews       Race[]      @relation("UserRaceReviews")
+  posts         Post[]
+  comments      Comment[]
 
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
@@ -75,4 +77,35 @@ model Race {
   
   winningConstructorId    Int?
   winningConstructor      Team?       @relation("WinningConstructor", fields: [winningConstructorId], references: [id])
+}
+
+
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  authorId    Int
+  author      User      @relation(fields: [authorId], references: [id])
+  tags        String[]
+  isNews      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  comments    Comment[]
+
+  @@index([authorId])
+  @@index([createdAt])
+}
+
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+  @@index([authorId])
 }
