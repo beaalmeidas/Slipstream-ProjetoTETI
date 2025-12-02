@@ -92,13 +92,12 @@ Swagger will run on http://localhost:3000/api-docs.
 
 ---
 
+## Project Structure:
 ```
 Slipstream-ProjetoTETI/ 
 ├── assets/ 
 │   ├── country-flags/
 │   ├── driver-photos/
-│
-├── ui/ /* pasta na qual eu quero colocar o frontend */ 
 │
 ├── api/ 
 │   ├── node_modules/
@@ -113,21 +112,29 @@ Slipstream-ProjetoTETI/
 │   │   ├── routes/
 │   │   │   └── index.ts
 │   │   │   └── userRoutes.ts
+│   │   │   └── postRoutes.ts
+│   │   │   └── commentRoutes.ts
 │   │   │   └── driverRoutes.ts
 │   │   │   └── raceRoutes.ts
 │   │   │   └── teamRoutes.ts
 │   │   ├── controllers/
 │   │   │   └── userController.ts
+│   │   │   └── postController.ts
+│   │   │   └── commentController.ts
 │   │   │   └── driverController.ts
 │   │   │   └── raceController.ts
 │   │   │   └── raceController.ts
 │   │   ├── schemas/
 │   │   │   └── userSchema.ts
+│   │   │   └── postSchema.ts
+│   │   │   └── commentSchema.ts
 │   │   │   └── driverSchema.ts
 │   │   │   └── raceSchema.ts
 │   │   │   └── teamSchema.ts
 │   │   ├── services/
 │   │   │   └── authService.ts
+│   │   │   └── postService.ts
+│   │   │   └── commentService.ts
 │   │   │   └── userService.ts
 │   │   │   └── driverService.ts
 │   │   │   └── raceService.ts
@@ -145,11 +152,38 @@ Slipstream-ProjetoTETI/
 │   │   └── app.ts
 │   │   └── server.ts
 │   ├── package-lock.json
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
 │   ├── package.json
 │   └── tsconfig.json
+│   └── prisma.config.ts
 │
-├── .env
-├── .env-example
-├── .gitignore
+├── ui/
+    ├── slipstream_ui/
+        ├── node_modules/
+        ├── public/
+            ├── favicon.ico
+            ├── index.html
+            ├── logo192.png
+            ├── logo512.png
+            ├── manifest.json
+            ├── robots.txt
+        ├── src/
+            ├── App.css
+            ├── App.test.tsx
+            ├── App.tsx
+            ├── index.css
+            ├── index.tsx
+            ├── logo.svg
+            ├── react-app-env.d.ts
+            ├── reportWebVitals.ts
+            ├── setupTests.ts
+        ├── .gitignore
+        ├── package-lock.json
+        ├── package.json
+        ├── tsconfig.json
+│
+└── notes.md
 └── README.md
 ```
